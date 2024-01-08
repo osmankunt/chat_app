@@ -26,7 +26,7 @@ class ChatPage extends StatelessWidget {
                       message: "Hi, this is the messsage!!");
                 }),
           ),
-          const ChatInput(),
+          ChatInput(),
         ],
       ),
     );
