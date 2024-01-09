@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CallbackFunction extends StatelessWidget {
+class MessageSeen extends StatelessWidget {
   Color color;
   final Function callbackFunction;
-  CallbackFunction({Key? key, required this.color, required this.callbackFunction}) : super(key: key);
+  MessageSeen({Key? key, required this.color, required this.callbackFunction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

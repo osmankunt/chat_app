@@ -1,4 +1,6 @@
 import 'package:chat_app/chat_page.dart';
+import 'package:chat_app/utils/theme_textstyle.dart';
+import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,7 +15,7 @@ class LoginPage extends StatelessWidget {
       print(passwordController.text);
       print('Logged in successfully!');
 
-      Navigator.pushNamed(context, '/chat', arguments: usernameController.text);
+      Navigator.pushReplacementNamed(context, '/chat', arguments: usernameController.text);
     } else {
       print('the operation is not successful');
     }
@@ -63,7 +65,8 @@ class LoginPage extends StatelessWidget {
                   key: _formKey,
                   child: Column(
                     children: [
-                      TextFormField(
+                      LoginTextField(
+                        hintText: "User Name",
                         validator: (value) {
                           if (value != null && value.isNotEmpty && value.length < 5) {
                             return "please put at least 5 chars to username field";
@@ -73,22 +76,11 @@ class LoginPage extends StatelessWidget {
                           return null;
                         },
                         controller: usernameController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          hintText: "Username",
-                        ),
                       ),
-                      TextFormField(
-                        obscureText: true,
+                      LoginTextField(
+                        isObscure: true,
+                        hintText: "Password",
                         controller: passwordController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          hintText: "Password",
-                        ),
                       ),
                     ],
                   ),

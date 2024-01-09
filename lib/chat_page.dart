@@ -15,11 +15,15 @@ class ChatPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hi $userName"),
+        title: Center(
+          child: Text(
+            "Hi $userName",
+          ),
+        ),
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pop(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                Navigator.pushReplacementNamed(context, '/');
               },
               icon: const Icon(Icons.logout))
         ],
