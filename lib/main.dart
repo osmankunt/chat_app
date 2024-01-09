@@ -15,7 +15,8 @@ class ChatApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       title: "Chat App",
-      home: const ChatPage(),
+      home: LoginPage(),
+      routes: {'/chat': (context) => ChatPage()},
     );
   }
 }

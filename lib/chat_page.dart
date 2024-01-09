@@ -1,3 +1,4 @@
+import 'package:chat_app/login_page.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -6,14 +7,22 @@ import 'package:flutter/widgets.dart';
 import 'widgets/chat_bubble.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  ChatPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final userName = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ozzy"),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.logout))],
+        title: Text("Hi $userName"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: Column(
         children: [

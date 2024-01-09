@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:chat_app/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,11 +7,13 @@ class LoginPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  void loginUser() {
+  void loginUser(context) {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       print(usernameController.text);
       print(passwordController.text);
       print('Logged in successfully!');
+
+      Navigator.pushNamed(context, '/chat', arguments: usernameController.text);
     } else {
       print('the operation is not successful');
     }
@@ -91,7 +93,11 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                ElevatedButton(onPressed: loginUser, child: Text('Login')),
+                ElevatedButton(
+                    onPressed: () {
+                      loginUser(context);
+                    },
+                    child: Text('Login')),
                 SizedBox(
                   height: 20,
                 ),
