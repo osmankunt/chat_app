@@ -45,7 +45,9 @@ class _ChatBubbleState extends State<ChatBubble> {
               height: 50,
               color: color,
             ),
-            MessageSeen(color: Colors.deepPurple, callbackFunction: changeColor),
+            (color == Colors.yellow)
+                ? MessageSeen(color: Colors.deepPurple, callbackFunction: changeColor)
+                : MessageSeen(color: Colors.yellow, callbackFunction: changeColor),
           ],
         ),
       ),
