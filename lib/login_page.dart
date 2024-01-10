@@ -1,4 +1,6 @@
 import 'package:chat_app/chat_page.dart';
+import 'package:chat_app/utils/brand_color.dart';
+import 'package:chat_app/utils/spacing.dart';
 import 'package:chat_app/utils/theme_textstyle.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat App"),
+        title: Text(
+          "Chat App",
+          style: TextStyle(color: BrandColor.textColor),
+        ),
       ),
       drawer: const Drawer(),
       body: SingleChildScrollView(
@@ -39,28 +44,26 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                Text(
                   "Let's sign you in",
                   style: TextStyle(
                     fontSize: 30,
-                    color: Colors.black,
+                    color: BrandColor.textColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.5,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const Text(
+                Text(
                   "Type your message here",
-                  style: TextStyle(color: Colors.brown, fontSize: 24),
+                  style: TextStyle(color: BrandColor.textColor, fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
                 Image.network(
                   "https://3009709.youcanlearnit.net/Alien_LIL_131338.png",
                   height: 200,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                verticalSpacing(20),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -77,6 +80,7 @@ class LoginPage extends StatelessWidget {
                         },
                         controller: usernameController,
                       ),
+                      verticalSpacing(20),
                       LoginTextField(
                         isObscure: true,
                         hintText: "Password",
@@ -85,14 +89,18 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                verticalSpacing(20),
                 ElevatedButton(
-                    onPressed: () {
-                      loginUser(context);
-                    },
-                    child: Text('Login')),
-                SizedBox(
-                  height: 20,
+                  style: ElevatedButton.styleFrom(backgroundColor: BrandColor.buttonColor),
+                  onPressed: () {
+                    loginUser(context);
+                  },
+                  child: Text(
+                    'Login',
+                    style: TextStyle(color: BrandColor.textColor),
+                  ),
                 ),
+                verticalSpacing(20),
                 GestureDetector(
                   onDoubleTap: () {
                     print('double tapped!!');
