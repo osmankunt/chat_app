@@ -1,10 +1,12 @@
 import 'package:chat_app/chat_page.dart';
 import 'package:chat_app/utils/brand_color.dart';
+import 'package:chat_app/utils/constants.dart';
 import 'package:chat_app/utils/spacing.dart';
 import 'package:chat_app/utils/theme_textstyle.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -59,9 +61,9 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(color: BrandColor.textColor, fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
-                Image.network(
-                  "https://3009709.youcanlearnit.net/Alien_LIL_131338.png",
-                  height: 200,
+                Image.asset(
+                  "assets/illustration.png",
+                  height: 300,
                 ),
                 verticalSpacing(20),
                 Form(
@@ -108,8 +110,11 @@ class LoginPage extends StatelessWidget {
                   onLongPress: () {
                     print('long pressed!!');
                   },
-                  onTap: () {
+                  onTap: () async {
                     print('the button clicked!!');
+                    if (!await launchUrl(Constants.urlConstant)) {
+                      throw Exception('Could not launch ${Constants.urlConstant}');
+                    }
                   },
                   child: const Column(
                     children: [

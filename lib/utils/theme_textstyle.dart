@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ThemeTextStyle {
-  static TextStyle? userNameTextStyle = const TextStyle(color: Colors.blueGrey);
+  static TextStyle? userNameTextStyle = GoogleFonts.aboreto(textStyle: TextStyle(color: Colors.blueGrey));
 }
