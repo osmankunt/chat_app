@@ -4,8 +4,11 @@ import 'package:chat_app/utils/constants.dart';
 import 'package:chat_app/utils/spacing.dart';
 import 'package:chat_app/utils/theme_textstyle.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:social_media_buttons/social_media_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
@@ -63,7 +66,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 Image.asset(
                   "assets/illustration.png",
-                  height: 300,
+                  height: 250,
                 ),
                 verticalSpacing(20),
                 Form(
@@ -116,18 +119,44 @@ class LoginPage extends StatelessWidget {
                       throw Exception('Could not launch ${Constants.urlConstant}');
                     }
                   },
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Find us on',
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        'https://ositech.co.uk',
+                        Constants.urlConstant.toString(),
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
+                ),
+                verticalSpacing(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SocialLoginButton(
+                      borderRadius: 20,
+                      buttonType: SocialLoginButtonType.facebook,
+                      onPressed: () async {
+                        if (!await launchUrl(Constants.socialUrlConstant)) {
+                          throw Exception('Could not launch ${Constants.socialUrlConstant}');
+                        }
+                      },
+                    ),
+                    Center(
+                      child: SocialMediaButton.instagram(
+                        onTap: () async {
+                          if (!await launchUrl(Constants.socialUrlConstant)) {
+                            throw Exception('Could not launch ${Constants.socialUrlConstant}');
+                          }
+                        },
+                        size: 35,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
