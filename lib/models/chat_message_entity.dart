@@ -13,10 +13,23 @@ class ChatMessageEntity {
       required this.createdAt,
       required this.author,
       this.isMessageSeen = false});
+
+  factory ChatMessageEntity.fromJson(Map<String, dynamic> json) {
+    return ChatMessageEntity(
+      message: json['text'],
+      id: json['id'],
+      createdAt: json['createdAt'],
+      author: json['author'],
+    );
+  }
 }
 
 class Author {
   String userName;
 
   Author({required this.userName});
+
+  factory Author.fromJson(Map<String, dynamic> json) {
+    return Author(userName: json['username']);
+  }
 }

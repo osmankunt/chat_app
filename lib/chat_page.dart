@@ -1,7 +1,7 @@
-import 'package:chat_app/login_page.dart';
+import 'dart:convert';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'models/chat_message_entity.dart';
@@ -41,8 +41,21 @@ class ChatPage extends StatelessWidget {
         )),
   ];
 
+  _getInitialMessages() async {
+    final response = await rootBundle.loadString('assets/mock_messages.json');
+
+    final List<dynamic> decodedList = jsonDecode(response) as List;
+
+    final List<ChatMessageEntity> _chatMessages = decodedList.map((e) {
+      return ChatMessageEntity.fromJson(e);
+    }).toList();
+
+    print(_chatMessages.length);
+  }
+
   @override
   Widget build(BuildContext context) {
+    _getInitialMessages();
     final userName = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
