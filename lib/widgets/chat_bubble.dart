@@ -1,11 +1,12 @@
 import 'package:chat_app/callback_function.dart';
+import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatefulWidget {
+  ChatMessageEntity entity;
   Alignment alignment;
-  String message;
 
-  ChatBubble({Key? key, required this.alignment, required this.message}) : super(key: key);
+  ChatBubble({Key? key, required this.alignment, required this.entity}) : super(key: key);
 
   @override
   State<ChatBubble> createState() => _ChatBubbleState();
@@ -16,6 +17,10 @@ class _ChatBubbleState extends State<ChatBubble> {
   void changeColor(colorParam) {
     setState(() {
       color = colorParam;
+      if (widget.entity.isMessageSeen != null) {
+        widget.entity.isMessageSeen = !widget.entity.isMessageSeen!;
+        print(widget.entity.isMessageSeen);
+      }
     });
   }
 
@@ -34,15 +39,16 @@ class _ChatBubbleState extends State<ChatBubble> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              widget.message,
+              widget.entity.message,
               style: const TextStyle(fontSize: 20),
             ),
-            Image.network(
-              "https://3009709.youcanlearnit.net/Alien_LIL_131338.png",
-              height: 90,
-            ),
+            if (widget.entity.imageUrl != null)
+              Image.network(
+                widget.entity.imageUrl!,
+                height: 90,
+              ),
             Container(
-              height: 50,
+              height: 20,
               color: color,
             ),
             (color == Colors.yellow)

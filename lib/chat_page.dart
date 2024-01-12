@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 
+import 'models/chat_message_entity.dart';
 import 'widgets/chat_bubble.dart';
 
 class ChatPage extends StatelessWidget {
@@ -35,8 +36,15 @@ class ChatPage extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return ChatBubble(
-                      alignment: index.isOdd ? Alignment.centerLeft : Alignment.centerRight,
-                      message: "Hi, this is the messsage!!");
+                    alignment: index.isOdd ? Alignment.centerLeft : Alignment.centerRight,
+                    entity: ChatMessageEntity(
+                        message: 'How you doing mate?',
+                        createdAt: DateTime.now().millisecondsSinceEpoch,
+                        id: '123445566',
+                        author: Author(
+                          userName: 'Ositech',
+                        )),
+                  );
                 }),
           ),
           ChatInput(),
