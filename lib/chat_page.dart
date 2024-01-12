@@ -10,6 +10,37 @@ import 'widgets/chat_bubble.dart';
 class ChatPage extends StatelessWidget {
   ChatPage({Key? key}) : super(key: key);
 
+  final List<ChatMessageEntity> _messages = [
+    ChatMessageEntity(
+        message: 'How you doing mate?',
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: '123445566',
+        author: Author(
+          userName: 'Ositech',
+        )),
+    ChatMessageEntity(
+        message: 'Its alright?',
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: '123445566',
+        author: Author(
+          userName: 'Bruder',
+        )),
+    ChatMessageEntity(
+        message: 'All good mate',
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: '123445566',
+        author: Author(
+          userName: 'Ositech',
+        )),
+    ChatMessageEntity(
+        message: 'Thanks',
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: '123445566',
+        author: Author(
+          userName: 'Bruder',
+        )),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final userName = ModalRoute.of(context)!.settings.arguments as String;
@@ -33,17 +64,10 @@ class ChatPage extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: _messages.length,
                 itemBuilder: (context, index) {
                   return ChatBubble(
-                    alignment: index.isOdd ? Alignment.centerLeft : Alignment.centerRight,
-                    entity: ChatMessageEntity(
-                        message: 'How you doing mate?',
-                        createdAt: DateTime.now().millisecondsSinceEpoch,
-                        id: '123445566',
-                        author: Author(
-                          userName: 'Ositech',
-                        )),
+                    entity: _messages[index],
                   );
                 }),
           ),
