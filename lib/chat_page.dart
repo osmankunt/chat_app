@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'models/chat_message_entity.dart';
 import 'widgets/chat_bubble.dart';
@@ -31,6 +30,11 @@ class _ChatPageState extends State<ChatPage> {
     });
 
     print(_chatMessages.length);
+  }
+
+  onSubmit(ChatMessageEntity entity) {
+    _messages.add(entity);
+    setState(() {});
   }
 
   initState() {
@@ -69,7 +73,9 @@ class _ChatPageState extends State<ChatPage> {
                   );
                 }),
           ),
-          ChatInput(),
+          ChatInput(
+            onSubmit: onSubmit,
+          ),
         ],
       ),
     );
