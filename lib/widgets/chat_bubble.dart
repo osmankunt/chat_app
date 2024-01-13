@@ -1,12 +1,13 @@
-import 'package:chat_app/callback_function.dart';
+import 'package:chat_app/message_seen.dart';
 import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:chat_app/utils/theme_textstyle.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatefulWidget {
   ChatMessageEntity entity;
+  Alignment alignment;
 
-  ChatBubble({Key? key, required this.entity}) : super(key: key);
+  ChatBubble({Key? key, required this.entity, required this.alignment}) : super(key: key);
 
   @override
   State<ChatBubble> createState() => _ChatBubbleState();
@@ -36,32 +37,38 @@ class _ChatBubbleState extends State<ChatBubble> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: messageBubbleDirection(),
-      ),
-      child: Column(
-        children: [
-          Text(
-            widget.entity.message,
-            style: ThemeTextStyle.messageTextStyle,
+    return Align(
+      alignment: widget.alignment,
+      child: Container(
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width * 0.5),
+        padding: const EdgeInsets.all(24),
+        margin: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: messageBubbleDirection(),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                widget.entity.message,
+                style: ThemeTextStyle.messageTextStyle,
+              ),
+              if (widget.entity.imageUrl != null)
+                Image.network(
+                  widget.entity.imageUrl!,
+                  height: 120,
+                ),
+              Container(
+                height: 20,
+                color: color,
+              ),
+              (color == Colors.yellow)
+                  ? MessageSeen(color: Colors.deepPurple, callbackFunction: changeColor)
+                  : MessageSeen(color: Colors.yellow, callbackFunction: changeColor),
+            ],
           ),
-          if (widget.entity.imageUrl != null)
-            Image.network(
-              widget.entity.imageUrl!,
-              height: 90,
-            ),
-          Container(
-            height: 20,
-            color: color,
-          ),
-          (color == Colors.yellow)
-              ? MessageSeen(color: Colors.deepPurple, callbackFunction: changeColor)
-              : MessageSeen(color: Colors.yellow, callbackFunction: changeColor),
-        ],
+        ),
       ),
     );
   }
