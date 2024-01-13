@@ -25,7 +25,7 @@ class _ChatBubbleState extends State<ChatBubble> {
   }
 
   BorderRadius messageBubbleDirection() {
-    if (widget.entity.author.userName == "Ositech") {
+    if (widget.entity.author.username == "janeDoe") {
       return const BorderRadius.only(
           topLeft: Radius.circular(20), topRight: Radius.circular(20), bottomRight: Radius.circular(20));
     } else {

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ChatMessageEntity {
   String message;
   String id;
@@ -19,17 +21,17 @@ class ChatMessageEntity {
       message: json['text'],
       id: json['id'],
       createdAt: json['createdAt'],
-      author: json['author'],
+      author: Author.fromJson((json['author'])),
     );
   }
 }
 
 class Author {
-  String userName;
+  String username;
 
-  Author({required this.userName});
+  Author({required this.username});
 
   factory Author.fromJson(Map<String, dynamic> json) {
-    return Author(userName: json['username']);
+    return Author(username: json['username']);
   }
 }

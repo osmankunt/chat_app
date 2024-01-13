@@ -7,39 +7,15 @@ import 'package:flutter/widgets.dart';
 import 'models/chat_message_entity.dart';
 import 'widgets/chat_bubble.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   ChatPage({Key? key}) : super(key: key);
 
-  final List<ChatMessageEntity> _messages = [
-    ChatMessageEntity(
-        message: 'How you doing mate?',
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: '123445566',
-        author: Author(
-          userName: 'Ositech',
-        )),
-    ChatMessageEntity(
-        message: 'Its alright?',
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: '123445566',
-        author: Author(
-          userName: 'Bruder',
-        )),
-    ChatMessageEntity(
-        message: 'All good mate',
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: '123445566',
-        author: Author(
-          userName: 'Ositech',
-        )),
-    ChatMessageEntity(
-        message: 'Thanks',
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: '123445566',
-        author: Author(
-          userName: 'Bruder',
-        )),
-  ];
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  List<ChatMessageEntity> _messages = [];
 
   _getInitialMessages() async {
     final response = await rootBundle.loadString('assets/mock_messages.json');
@@ -50,12 +26,20 @@ class ChatPage extends StatelessWidget {
       return ChatMessageEntity.fromJson(e);
     }).toList();
 
+    setState(() {
+      _messages = _chatMessages;
+    });
+
     print(_chatMessages.length);
+  }
+
+  initState() {
+    _getInitialMessages();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _getInitialMessages();
     final userName = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
