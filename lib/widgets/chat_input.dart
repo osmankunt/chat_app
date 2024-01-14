@@ -1,8 +1,5 @@
 import 'package:chat_app/models/chat_message_entity.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class ChatInput extends StatelessWidget {
   final Function(ChatMessageEntity) onSubmit;
