@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:ffi';
+import 'package:chat_app/models/image_model.dart';
 import 'package:chat_app/widgets/chat_input.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,7 +32,26 @@ class _ChatPageState extends State<ChatPage> {
       });
     }).then((value) => {print('get messages operation is done')});
 
-    print(_messages.length);
+    //print(_messages.length);
+  }
+
+  _getNetworkImages() async {
+    var urlEndPoint = Uri.parse("https://www.boredapi.com/api/activity");
+
+    final response = await http.get(urlEndPoint);
+
+    if (response.statusCode == 200) {
+      final dynamic decodedList = jsonDecode(response.body);
+
+      final _networkImage = ImageModel.fromJson(decodedList);
+      //final List<ImageModel> _networkImages = decodedList.map((e) {
+      //  return ImageModel.fromJson(e);
+      //}).toList();
+
+      print(_networkImage.price);
+    } else {
+      print("bulunamadi.");
+    }
   }
 
   onSubmit(ChatMessageEntity entity) {
@@ -39,11 +61,13 @@ class _ChatPageState extends State<ChatPage> {
 
   initState() {
     _getInitialMessages();
+    _getNetworkImages();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _getNetworkImages();
     final userName = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
