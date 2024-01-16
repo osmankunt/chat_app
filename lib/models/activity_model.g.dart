@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'image_model.dart';
+part of 'activity_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ImageModel _$ImageModelFromJson(Map<String, dynamic> json) => ImageModel(
+ActivityModel _$ActivityModelFromJson(Map<String, dynamic> json) => ActivityModel(
       activity: json['activity'] as String,
       type: json['type'] as String,
       numberOfParticipants: json['participants'] as int,
@@ -14,8 +14,7 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) => ImageModel(
       key: json['key'] as String,
     );
 
-Map<String, dynamic> _$ImageModelToJson(ImageModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ActivityModelToJson(ActivityModel instance) => <String, dynamic>{
       'activity': instance.activity,
       'type': instance.type,
       'participants': instance.numberOfParticipants,

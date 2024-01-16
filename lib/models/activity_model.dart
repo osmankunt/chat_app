@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'image_model.g.dart';
+part 'activity_model.g.dart';
 
 @JsonSerializable()
-class ImageModel {
+class ActivityModel {
   String activity;
   String type;
 
@@ -12,11 +12,11 @@ class ImageModel {
   double price;
   String key;
 
-  ImageModel(
+  ActivityModel(
       {required this.activity, required this.type, required this.numberOfParticipants, required this.price, required this.key});
 
-  factory ImageModel.fromJson(Map<String, dynamic> json) => _$ImageModelFromJson(json);
+  factory ActivityModel.fromJson(Map<String, dynamic> json) => _$ActivityModelFromJson(json);
 
-  /// Connect the generated [_$ImageModelToJson] function to the `toJson` method.
-  Map<String, dynamic> toJson() => _$ImageModelToJson(this);
+  /// Connect the generated [_$ActivityModelToJson] function to the `toJson` method.
+  Map<String, dynamic> toJson() => _$ActivityModelToJson(this);
 }

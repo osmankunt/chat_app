@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
-import 'package:chat_app/models/image_model.dart';
+import 'package:chat_app/models/activity_model.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _ChatPageState extends State<ChatPage> {
     //print(_messages.length);
   }
 
-  _getNetworkImages() async {
+  Future<ActivityModel> _getNetworkImages() async {
     var urlEndPoint = Uri.parse("https://www.boredapi.com/api/activity");
 
     final response = await http.get(urlEndPoint);
@@ -43,14 +44,16 @@ class _ChatPageState extends State<ChatPage> {
     if (response.statusCode == 200) {
       final dynamic decodedList = jsonDecode(response.body);
 
-      final _networkImage = ImageModel.fromJson(decodedList);
+      final _networkImage = ActivityModel.fromJson(decodedList);
       //final List<ImageModel> _networkImages = decodedList.map((e) {
       //  return ImageModel.fromJson(e);
       //}).toList();
 
       print(_networkImage.price);
+      return _networkImage;
     } else {
       print("bulunamadi.");
+      throw Exception('API has no data');
     }
   }
 
@@ -87,6 +90,13 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Column(
         children: [
+          FutureBuilder<ActivityModel>(
+              future: _getNetworkImages(),
+              builder: (BuildContext context, AsyncSnapshot<ActivityModel> snapshot) {
+                if (snapshot.hasData) return Text(snapshot.data!.activity);
+
+                return const CircularProgressIndicator();
+              }),
           Expanded(
             child: ListView.builder(
                 itemCount: _messages.length,
