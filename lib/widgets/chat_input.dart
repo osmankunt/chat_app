@@ -1,4 +1,5 @@
 import 'package:chat_app/models/chat_message_entity.dart';
+import 'package:chat_app/widgets/activity_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class ChatInput extends StatelessWidget {
@@ -26,7 +27,15 @@ class ChatInput extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+          IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ActivityBottomSheet();
+                    });
+              },
+              icon: const Icon(Icons.add)),
           Expanded(
             child: TextField(
               controller: messageController,
