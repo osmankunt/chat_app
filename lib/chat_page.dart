@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:chat_app/models/activity_model.dart';
+import 'package:chat_app/repo/activity_repo.dart';
 import 'package:chat_app/widgets/chat_input.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -32,30 +32,9 @@ class _ChatPageState extends State<ChatPage> {
         _messages = _chatMessages;
       });
     }).then((value) => {print('get messages operation is done')});
-
-    //print(_messages.length);
   }
 
-  Future<ActivityModel> _getNetworkImages() async {
-    var urlEndPoint = Uri.parse("https://www.boredapi.com/api/activity");
-
-    final response = await http.get(urlEndPoint);
-
-    if (response.statusCode == 200) {
-      final dynamic decodedList = jsonDecode(response.body);
-
-      final _networkImage = ActivityModel.fromJson(decodedList);
-      //final List<ImageModel> _networkImages = decodedList.map((e) {
-      //  return ImageModel.fromJson(e);
-      //}).toList();
-
-      print(_networkImage.price);
-      return _networkImage;
-    } else {
-      print("bulunamadi.");
-      throw Exception('API has no data');
-    }
-  }
+  final ActivityRepo _activityRepo = ActivityRepo();
 
   onSubmit(ChatMessageEntity entity) {
     _messages.add(entity);
@@ -64,13 +43,13 @@ class _ChatPageState extends State<ChatPage> {
 
   initState() {
     _getInitialMessages();
-    _getNetworkImages();
+    _activityRepo.getNetworkImages();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _getNetworkImages();
+    _activityRepo.getNetworkImages();
     final userName = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
@@ -91,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
       body: Column(
         children: [
           FutureBuilder<ActivityModel>(
-              future: _getNetworkImages(),
+              future: _activityRepo.getNetworkImages(),
               builder: (BuildContext context, AsyncSnapshot<ActivityModel> snapshot) {
                 if (snapshot.hasData) return Text(snapshot.data!.activity);
 
