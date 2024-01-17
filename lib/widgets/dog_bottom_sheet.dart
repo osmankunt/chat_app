@@ -3,7 +3,8 @@ import 'package:chat_app/repo/dog_repo.dart';
 import 'package:flutter/material.dart';
 
 class DogBottomSheet extends StatelessWidget {
-  DogBottomSheet({Key? key}) : super(key: key);
+  final Function(String) onSelection;
+  DogBottomSheet({Key? key, required this.onSelection}) : super(key: key);
 
   final DogRepo _dogRepo = DogRepo();
 
@@ -23,7 +24,11 @@ class DogBottomSheet extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Image.network(snapshot.data!.message),
+                    child: GestureDetector(
+                        onTap: () {
+                          onSelection(snapshot.data!.url);
+                        },
+                        child: Image.network(snapshot.data!.url)),
                   );
                 });
           }

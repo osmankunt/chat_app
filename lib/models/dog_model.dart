@@ -1,16 +1,16 @@
 class DogModel {
-  String message;
+  String url;
   String status;
 
-  DogModel({required this.message, required this.status});
+  DogModel({required this.url, required this.status});
 
   factory DogModel.fromJson(Map<String, dynamic> json) => DogModel(
-        message: json['message'] as String,
+        url: json['message'] as String,
         status: json['status'] as String,
       );
 
   Map<String, dynamic> dogModelToJson(DogModel instance) => <String, dynamic>{
-        'message': instance.message,
+        'message': instance.url,
         'status': instance.status,
       };
 }
