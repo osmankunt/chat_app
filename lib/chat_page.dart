@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
 import 'package:chat_app/models/activity_model.dart';
 import 'package:chat_app/repo/activity_repo.dart';
 import 'package:chat_app/widgets/chat_input.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

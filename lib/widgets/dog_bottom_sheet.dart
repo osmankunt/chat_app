@@ -1,17 +1,17 @@
-import 'package:chat_app/models/activity_model.dart';
-import 'package:chat_app/repo/activity_repo.dart';
+import 'package:chat_app/models/dog_model.dart';
+import 'package:chat_app/repo/dog_repo.dart';
 import 'package:flutter/material.dart';
 
-class ActivityBottomSheet extends StatelessWidget {
-  ActivityBottomSheet({Key? key}) : super(key: key);
+class DogBottomSheet extends StatelessWidget {
+  DogBottomSheet({Key? key}) : super(key: key);
 
-  final ActivityRepo _activityRepo = ActivityRepo();
+  final DogRepo _dogRepo = DogRepo();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ActivityModel>(
-        future: _activityRepo.getNetworkImages(),
-        builder: (BuildContext context, AsyncSnapshot<ActivityModel> snapshot) {
+    return FutureBuilder<DogModel>(
+        future: _dogRepo.getDogImages(),
+        builder: (BuildContext context, AsyncSnapshot<DogModel> snapshot) {
           if (snapshot.hasData) {
             return GridView.builder(
                 itemCount: 1,
@@ -23,7 +23,7 @@ class ActivityBottomSheet extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text(snapshot.data!.activity),
+                    child: Image.network(snapshot.data!.message),
                   );
                 });
           }
