@@ -37,6 +37,7 @@ class _ChatBubbleState extends State<ChatBubble> {
 
   @override
   Widget build(BuildContext context) {
+    bool isAuthor = widget.entity.author.username == "Ositech";
     return Align(
       alignment: widget.alignment,
       child: Container(
@@ -44,7 +45,7 @@ class _ChatBubbleState extends State<ChatBubble> {
         padding: const EdgeInsets.all(24),
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: isAuthor ? Theme.of(context).primaryColor : Colors.black87,
           borderRadius: messageBubbleDirection(),
         ),
         child: SingleChildScrollView(
