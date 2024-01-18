@@ -31,6 +31,11 @@ class DogBottomSheet extends StatelessWidget {
                         child: Image.network(snapshot.data!.url)),
                   );
                 });
+          } else if (snapshot.hasError) {
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text('Error occured ${snapshot.error}'),
+            );
           }
 
           return const Padding(
