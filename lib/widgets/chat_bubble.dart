@@ -37,15 +37,15 @@ class _ChatBubbleState extends State<ChatBubble> {
 
   @override
   Widget build(BuildContext context) {
-    bool isAuthor = widget.entity.author.username == "Ositech";
+    bool isAuthor = widget.entity.author.username == "janeDoe";
     return Align(
       alignment: widget.alignment,
       child: Container(
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width * 0.5),
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width * 0.6),
         padding: const EdgeInsets.all(24),
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: isAuthor ? Theme.of(context).primaryColor : Colors.black87,
+          color: isAuthor ? Theme.of(context).primaryColor : Colors.blueGrey,
           borderRadius: messageBubbleDirection(),
         ),
         child: SingleChildScrollView(
@@ -56,9 +56,12 @@ class _ChatBubbleState extends State<ChatBubble> {
                 style: ThemeTextStyle.messageTextStyle,
               ),
               if (widget.entity.imageUrl != null)
-                Image.network(
-                  widget.entity.imageUrl!,
-                  height: 120,
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(widget.entity.imageUrl!)),
+                      borderRadius: BorderRadius.circular(12)),
                 ),
               Container(
                 height: 20,

@@ -65,9 +65,12 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(color: BrandColor.textColor, fontSize: 24),
                   textAlign: TextAlign.center,
                 ),
-                Image.asset(
-                  "assets/illustration.png",
-                  height: 250,
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      image: const DecorationImage(fit: BoxFit.fitWidth, image: AssetImage("assets/illustration.png")),
+                      borderRadius: BorderRadius.circular(12)),
                 ),
                 verticalSpacing(20),
                 Form(
